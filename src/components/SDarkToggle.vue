@@ -33,12 +33,12 @@ const toggle = () => {
 
 .light {
   color: #404040;
-  background-color: #bab9b9;
-  border: 1px solid #8b8b8b;
+  background-color: transparent;
+  border: 1px solid #adadad;
   
   &:hover {
-    border-color: #393939;
-    background-color: #676767;
+    border-color: #919191;
+    background-color: #cacaca;
   }
 }
 .s-darktoggle {
@@ -48,7 +48,7 @@ const toggle = () => {
   width: 20px;
   height: 25px;
   padding: 0 8px;
-  border-radius: 8px;
+  border-radius: 12px;
   user-select: none;
   cursor: pointer;
   transition: 0.2s;

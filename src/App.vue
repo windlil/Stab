@@ -11,7 +11,7 @@ const toggle = (emitValue:boolean) => {
 </script>
 
 <template>
-  <div class="main" :style="{backgroundColor: isDark?'#000':'#BFC1C8'}">
+  <div class="main" :style="{backgroundColor: isDark?'#121212':'#BFC1C8'}">
     <SDarkToggle @toggle-emit="toggle" class="toggle"></SDarkToggle>
           <STime class="time" :is-dark="isDark"></STime>
     <SSearch></SSearch>
