@@ -11,13 +11,13 @@ const toggle = () => {
 </script>
 
 <template>
-        <div class="s-darktoggle" :class="isDark ? 'dark' : 'light'" @click="toggle">
-          <div class="icon">
-                <img v-if="isDark" src="/images/moon.svg" alt="">  
-                <img v-else src="/images/sun.svg" alt="">    
-            </div>
-            <div class="text">
-              {{ isDark ? 'Dark' : 'Light' }}
+  <div class="s-darktoggle" :class="isDark ? 'dark' : 'light'" @click="toggle">
+    <div class="icon">
+      <img v-if="isDark" src="/images/moon.svg" alt="">  
+      <img v-else src="/images/sun.svg" alt="">    
+    </div>
+    <div class="text">
+      {{ isDark ? 'Dark' : 'Light' }}
     </div>
   </div>
 </template>
