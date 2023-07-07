@@ -15,10 +15,7 @@ const toggle = () => {
     <div class="icon">
       <img v-if="isDark" src="/images/moon.svg" alt="">  
       <img v-else src="/images/sun.svg" alt="">    
-    </div>
-    <div class="text">
-      {{ isDark ? 'Dark' : 'Light' }}
-    </div>
+      </div>
   </div>
 </template>
 
@@ -35,20 +32,20 @@ const toggle = () => {
 }
 
 .light {
-  color: #1d1d1d;
-  background-color: transparent;
-  border: 1px solid #d6d6d6;
+  color: #404040;
+  background-color: #bab9b9;
+  border: 1px solid #8b8b8b;
   
   &:hover {
-    border-color: #646464;
-
+    border-color: #393939;
+    background-color: #676767;
   }
 }
 .s-darktoggle {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
+  width: 20px;
   height: 25px;
   padding: 0 8px;
   border-radius: 8px;
