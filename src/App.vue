@@ -1,20 +1,41 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { saveData, getData } from './utils/storage'
 import SDarkToggle from './components/SDarkToggle.vue';
 import SSearch from './components/SSearch.vue';
 import STime from './components/STime.vue';
+import SMark from './components/SMark.vue';
 
 const isDark = ref(true)
+const SMarkRef = ref<InstanceType<typeof SMark>>()
+
 const toggle = (emitValue:boolean) => {
   isDark.value = emitValue
+  saveData('isDark', isDark.value)
 }
+
+const initTheme = () => {
+  const d = getData('isDark')
+  if (d !== undefined) {
+    isDark.value = d
+  }
+}
+
+const clickTime = () => {
+SMarkRef.value?.open()
+}
+
+onMounted(() => {
+  initTheme()
+})
 </script>
 
 <template>
-  <div class="main" :style="{backgroundColor: isDark?'#121212':'#BFC1C8'}">
+  <div class="main" :style="{ backgroundColor: isDark ? '#1a1a1a' : '#BFC1C8' }">
     <SDarkToggle @toggle-emit="toggle" class="toggle"></SDarkToggle>
-          <STime class="time" :is-dark="isDark"></STime>
+    <STime class="time" :is-dark="isDark" @click-time-emit="clickTime"></STime>
     <SSearch></SSearch>
+    <SMark ref="SMarkRef" class="mark"/>
   </div>
 </template>
 
@@ -38,6 +59,12 @@ const toggle = (emitValue:boolean) => {
   .time {
     margin-top: 200px;
     margin-bottom: 20px;
+  }
+  
+  .mark {
+    position: absolute;
+    left: 0;
+    top: 20px;
   }
 }
 

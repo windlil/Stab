@@ -1,4 +1,4 @@
-export function saveData(key:string, data:object|string) {
+export function saveData(key:string, data:any) {
   localStorage.setItem(key, JSON.stringify(data))
 }
 

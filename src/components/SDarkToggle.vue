@@ -1,13 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { getData } from '../utils/storage';
 
 const emit = defineEmits(['toggleEmit'])
 const isDark = ref(true)
+
+const initTheme = () => {
+  const d = getData('isDark')
+  if (d !== undefined) {
+    isDark.value = d
+  }
+}
 
 const toggle = () => {
   isDark.value = !isDark.value
   emit('toggleEmit', isDark.value)
 }
+
+onMounted(() => {
+  initTheme()
+})
 </script>
 
 <template>
