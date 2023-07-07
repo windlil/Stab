@@ -25,7 +25,7 @@ const toggle = () => {
 <style scoped lang="less">
 .dark {
   color: #ffffff;
-  background-color: #313131;
+  background-color: #232323;
   border: 1px solid #555555;
 
   &:hover {
@@ -40,8 +40,8 @@ const toggle = () => {
   border: 1px solid #d6d6d6;
   
   &:hover {
-    border-color: #b0b0b0;
-    background-color: #f4f4f4;
+    border-color: #646464;
+
   }
 }
 .s-darktoggle {
