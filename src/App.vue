@@ -1,10 +1,16 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import SDarkToggle from './components/SDarkToggle.vue';
+
+const isDark = ref(true)
+const toggle = (emitValue:boolean) => {
+  isDark.value = emitValue
+}
 </script>
 
 <template>
-  <div class="main">
-    <SDarkToggle></SDarkToggle>
+  <div class="main" :style="{backgroundColor: isDark?'#000':'#fff'}">
+    <SDarkToggle @toggle-emit="toggle"></SDarkToggle>
   </div>
 </template>
 
@@ -16,5 +22,6 @@ import SDarkToggle from './components/SDarkToggle.vue';
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.3s ease;
 }
 </style>

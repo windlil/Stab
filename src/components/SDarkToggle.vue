@@ -1,52 +1,67 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const isDark = ref(false)
+const emit = defineEmits(['toggleEmit'])
+const isDark = ref(true)
 
 const toggle = () => {
   isDark.value = !isDark.value
-  console.log(isDark.value)
+  emit('toggleEmit', isDark.value)
 }
 </script>
 
 <template>
-  <div class="s-darktoggle" @click="toggle">
-    <div class="icon">
-      <img src="/images/moon.svg" alt="">      
-    </div>
-    <div class="text">
-      Dark
+        <div class="s-darktoggle" :class="isDark ? 'dark' : 'light'" @click="toggle">
+          <div class="icon">
+                <img v-if="isDark" src="/images/moon.svg" alt="">  
+                <img v-else src="/images/sun.svg" alt="">    
+            </div>
+            <div class="text">
+              {{ isDark ? 'Dark' : 'Light' }}
     </div>
   </div>
 </template>
 
 <style scoped lang="less">
-.s-darktoggle {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 62px;
-  height: 30px;
-  padding: 0 8px;
-  background-color: #313131;
+.dark {
   color: #ffffff;
-  border-radius: 8px;
+  background-color: #313131;
   border: 1px solid #555555;
-  user-select: none;
-  cursor: pointer;
-  transition: 0.2s;
-  .icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-  }
-  .text {
-    font-size: 12px;
-  }
 
   &:hover {
     border-color: #a1a1a1;
     background-color: #3a3a3a;
+  }
+}
+
+.light {
+  color: #1d1d1d;
+  background-color: transparent;
+  border: 1px solid #d6d6d6;
+  
+  &:hover {
+    border-color: #b0b0b0;
+    background-color: #f4f4f4;
+  }
+}
+.s-darktoggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 25px;
+  padding: 0 8px;
+  border-radius: 8px;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.2s;
+  .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .text {
+    font-size: 12px;
+    margin-left: 4px;
   }
 }
 </style>
