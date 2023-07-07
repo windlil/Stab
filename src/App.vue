@@ -63,8 +63,8 @@ onMounted(() => {
   
   .mark {
     position: absolute;
-    left: 0;
-    top: 20px;
+    top: 0;
+    margin: 0 auto;
   }
 }
 
