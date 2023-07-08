@@ -1,26 +1,47 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
+import { saveData, getData } from '../utils/storage';
 
 const emit = defineEmits(['closeMarkEmit'])
+
+const name = ref()
+const address = ref()
 const maskRef = ref<HTMLDivElement>()
-const list = ref([{ name: 'baidu', address: 'https://www.baidu.com/' },
-{ name: 'baidu5464564564', address: 'https://www.baidu.com/' },
-{ name: 'github', address: 'https://www.baidu.com/' },
-{ name: 'test', address: 'https://www.baidu.com/' },
-{ name: 'douyu', address: 'https://www.baidu.com/' },
-{
-  name: 'youku', address: 'https://www.baidu.com/',
-}, {
-  name: 'youku', address: 'https://www.baidu.com/',
-}, {
-  name: 'youku', address: 'https://www.baidu.com/',
-}, {
-  name: 'youku', address: 'https://www.baidu.com/',
-}])
+const list = ref([
+  {name: 'GitHub', address: 'https://github.com/'},
+  {name: 'bilibili',address: 'https://www.bilibili.com/'},
+  {name: 'Vue', address: 'https://vuejs.org/'}
+])
+
+const initData = () => {
+  const d = getData('mark')
+  if (d) {
+    list.value = d
+  }
+}
+
+const add = () => {
+  if (name.value && address.value) {
+    list.value.push({
+      name: name.value,
+      address: address.value
+    })
+  }
+  saveData('mark',list.value)
+}
+
+const remove = (index:number) => {
+  list.value.splice(index,1)
+  saveData('mark',list.value)
+}
 
 const closeMark = () => {
   emit('closeMarkEmit')
 }
+
+onMounted(() => {
+  initData()
+})
 
 </script>
 
@@ -32,22 +53,22 @@ const closeMark = () => {
         <span>address</span>
       </div>
       <div class="list" v-if="list.length > 0">
-        <div class="item" v-for="item in list">
+        <div class="item" v-for="(item, index) in list">
           <div class="name">{{ item.name }}</div>
           <div class="address">{{ item.address }}</div>
-          <div class="remove">
+          <div class="remove" @click="remove(index)">
             <img src="/images/remove.svg" alt="">
           </div>
         </div>
       </div>
       <div class="form">
         <div class="input-name">
-          <input class="input" type="text">
+          <input class="input" type="text" v-model="name">
         </div>
         <div class="input-address">
-          <input class="input" type="text">
+          <input class="input" type="text" v-model="address">
         </div>
-        <div class="add">
+        <div class="add" @click="add">
           <img src="/images/add.svg" alt="">
         </div>
       </div>
@@ -138,6 +159,7 @@ const closeMark = () => {
           width: 18px;
           height: 18px;
           cursor: pointer;
+          transition: 0.1s ease;
         }
       }
     }
