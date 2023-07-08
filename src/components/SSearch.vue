@@ -84,19 +84,19 @@ const enterInputHook = () => {
   }
 }
 
-const autoFocusHook = () => {
-  document.addEventListener('keydown', () => {
-    setTimeout(() => {
-      inputRef.value?.focus()
-    }, 100)
-  },false)
-}
+// const autoFocusHook = () => {
+//   document.addEventListener('keydown', () => {
+//     setTimeout(() => {
+//       inputRef.value?.focus()
+//     }, 100)
+//   },false)
+// }
 
 onMounted(() => {
   initDataHook()
   enterInputHook()
   closeHook()
-  autoFocusHook()
+  // autoFocusHook()
 })
 </script>
 

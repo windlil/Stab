@@ -5,9 +5,11 @@ import SDarkToggle from './components/SDarkToggle.vue';
 import SSearch from './components/SSearch.vue';
 import STime from './components/STime.vue';
 import SMark from './components/SMark.vue';
+import SAddMark from './components/SAddMark.vue';
 
 const isDark = ref(true)
 const SMarkRef = ref<InstanceType<typeof SMark>>()
+const isAdd = ref(false)
 
 const toggle = (emitValue:boolean) => {
   isDark.value = emitValue
@@ -25,6 +27,14 @@ const clickTime = () => {
 SMarkRef.value?.open()
 }
 
+const addMark = () => {
+  isAdd.value = true
+}
+
+const closeMark =() => {
+  isAdd.value = false
+}
+
 onMounted(() => {
   initTheme()
 })
@@ -35,7 +45,8 @@ onMounted(() => {
     <SDarkToggle @toggle-emit="toggle" class="toggle"></SDarkToggle>
     <STime class="time" :is-dark="isDark" @click-time-emit="clickTime"></STime>
     <SSearch></SSearch>
-    <SMark ref="SMarkRef" class="mark"/>
+    <SMark ref="SMarkRef" class="mark" @add-mark-emit="addMark"/>
+    <SAddMark @close-mark-emit="closeMark" v-if="isAdd"/>
   </div>
 </template>
 

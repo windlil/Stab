@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const emit = defineEmits(['addMarkEmit'])
 const SMarkRef = ref<HTMLDivElement>()
-const list = ref([])
+const list = ref(['github', 'youtube'])
 
 const open = () => {
   SMarkRef.value?.classList.toggle('open')
@@ -17,6 +18,11 @@ const test = (e:WheelEvent) => {
   }
 }
 
+const addMark =() => {
+  open()
+  emit('addMarkEmit')
+}
+
 defineExpose({
   open
 })
@@ -24,11 +30,13 @@ defineExpose({
 
 <template>
   <div class="s-mark" ref="SMarkRef">
-    <div class="add">
+    <div class="add" @click="addMark">
       <img src="/images/add.svg" alt="">
     </div>
     <div class="mark-list" v-if="list.length > 0" @wheel="test">
-      <a href="" class="item" v-for="item in list">{{ item }}</a>
+      <a href="" class="item" v-for="item in list">
+        <span>{{ item }}</span>
+      </a>
     </div>
   </div>
 </template>
@@ -70,6 +78,8 @@ defineExpose({
     overflow-x: scroll;
     user-select: none;
     .item {
+      display: flex;
+      align-items: center;
       font-size: 12px;
       font-weight: bold;
       margin: 0 10px;
