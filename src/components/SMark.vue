@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+interface LIST {
+  name:string,
+  address:string
+}
+
+defineProps<{
+  markList: LIST[]
+}>()
+
 const emit = defineEmits(['addMarkEmit'])
 const SMarkRef = ref<HTMLDivElement>()
-const list = ref(['github', 'youtube'])
 
 const open = () => {
   SMarkRef.value?.classList.toggle('open')
@@ -33,9 +41,9 @@ defineExpose({
     <div class="add" @click="addMark">
       <img src="/images/add.svg" alt="">
     </div>
-    <div class="mark-list" v-if="list.length > 0" @wheel="test">
-      <a href="" class="item" v-for="item in list">
-        <span>{{ item }}</span>
+    <div class="mark-list" v-if="markList.length > 0" @wheel="test">
+      <a :href=item.address target="_blank" class="item" v-for="item in markList">
+        <span>{{ item.name }}</span>
       </a>
     </div>
   </div>

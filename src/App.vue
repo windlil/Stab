@@ -10,6 +10,30 @@ import SAddMark from './components/SAddMark.vue';
 const isDark = ref(true)
 const SMarkRef = ref<InstanceType<typeof SMark>>()
 const isAdd = ref(false)
+const markList = ref<any[]>([])
+
+const getMarkList = () => {
+  const d = getData('mark')
+  if (d) {
+    markList.value = d
+  } else {
+    markList.value = [
+      {name: 'GitHub', address: 'https://github.com/'},
+      {name: 'bilibili',address: 'https://www.bilibili.com/'},
+      {name: 'Vue', address: 'https://vuejs.org/'},
+      {name: 'TypeScript', address: 'https://www.typescriptlang.org/'},
+      {name: 'Vite', address: 'https://vitejs.dev/'},
+      {name: 'MDN', address: 'https://developer.mozilla.org/'},
+      {name: 'iconfont', address: 'https://www.iconfont.cn/'},
+      {name: 'youtube', address: 'https://youtube.com/'}
+    ]
+    saveData('mark', markList.value)
+  }
+}
+
+const listenMarkChange =() => {
+  getMarkList()
+}
 
 const toggle = (emitValue:boolean) => {
   isDark.value = emitValue
@@ -37,6 +61,7 @@ const closeMark =() => {
 
 onMounted(() => {
   initTheme()
+  getMarkList()
 })
 </script>
 
@@ -45,8 +70,8 @@ onMounted(() => {
     <SDarkToggle @toggle-emit="toggle" class="toggle"></SDarkToggle>
     <STime class="time" :is-dark="isDark" @click-time-emit="clickTime"></STime>
     <SSearch></SSearch>
-    <SMark ref="SMarkRef" class="mark" @add-mark-emit="addMark"/>
-    <SAddMark @close-mark-emit="closeMark" v-if="isAdd"/>
+    <SMark :mark-list="markList" ref="SMarkRef" class="mark" @add-mark-emit="addMark"/>
+    <SAddMark @change-mark-emit="listenMarkChange" @close-mark-emit="closeMark" v-if="isAdd"/>
   </div>
 </template>
 

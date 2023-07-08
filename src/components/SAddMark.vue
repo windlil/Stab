@@ -2,16 +2,12 @@
 import { onMounted, ref } from 'vue';
 import { saveData, getData } from '../utils/storage';
 
-const emit = defineEmits(['closeMarkEmit'])
+const emit = defineEmits(['closeMarkEmit', 'changeMarkEmit'])
 
 const name = ref()
 const address = ref()
 const maskRef = ref<HTMLDivElement>()
-const list = ref([
-  {name: 'GitHub', address: 'https://github.com/'},
-  {name: 'bilibili',address: 'https://www.bilibili.com/'},
-  {name: 'Vue', address: 'https://vuejs.org/'}
-])
+const list = ref<any[]>([])
 
 const initData = () => {
   const d = getData('mark')
@@ -28,11 +24,15 @@ const add = () => {
     })
   }
   saveData('mark',list.value)
+  emit('changeMarkEmit')
+  name.value = ''
+  address.value = ''
 }
 
 const remove = (index:number) => {
   list.value.splice(index,1)
   saveData('mark',list.value)
+  emit('changeMarkEmit')
 }
 
 const closeMark = () => {
