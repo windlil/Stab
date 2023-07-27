@@ -1,5 +1,6 @@
 ## Stab📌
 
+**简单轻便的浏览器起始页**
 **Simple and lightweight browser tab page**
 
 **DEMO：https://spacesoulsl.github.io/Stab/**
